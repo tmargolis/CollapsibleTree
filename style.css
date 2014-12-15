@@ -1,0 +1,46 @@
+.qv-object-collapsibleTree div.qv-object-content-container {
+	overflow: auto;
+}
+.qv-object-collapsibleTree td, th {
+	border-top: 0px solid #fff;
+	border-bottom: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	vertical-align: middle;
+	cursor: default;
+	font-size: 12px;
+}
+.qv-object-collapsibleTree td.numeric {
+	text-align: right;
+}
+.qv-object-collapsibleTree button {
+	width: 100%;
+}
+path {
+  /*stroke: #fff;*/
+  /*fill-rule: evenodd;*/
+  fill: none;
+  stroke: black;
+}
+
+.node {
+  cursor: pointer;
+}
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font: 10px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}

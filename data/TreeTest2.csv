@@ -1,0 +1,54 @@
+P2,C2,V2
+purpose1,DF_104,1
+purpose2,DF_105,1
+purpose3,Entity Master Data (from AZure),1
+purpose3,Pack Master data (From Azure),1
+purpose3,Activity Master Data (From Enigma),1
+purpose3,Cost Centre Master (From Azure and local ERP),1
+purpose3,Actual Exchange Rate Master (From Azure),1
+purpose3,Budget Exchange Rate Master (from Azure),1
+purpose3,Actual Costs Data File (From local ERP),1
+purpose3,Fieldforce Costs/ FTE & Positions actuals (From CDA),1
+purpose3,Extended Sales Forecast,1
+purpose3,Actual Sales Data File,1
+purpose3,Parallel Trade Sales,1
+purpose3,IMS Product,1
+purpose3,IMS Market,1
+purpose4,DF_109,1
+purpose5,Fixed Costs Forecast,1
+purpose5,Enigma Non-Fixed Costs Forecast,1
+purpose5,Sales Forecast,1
+purpose5,IMS Forecast,1
+purpose5,IMS Narrative Forecast,1
+purpose5,Parallel Trade Forecast,1
+purpose5,Demand Price / Volume Variance Forecast,1
+purpose5,Headcount Forecast,1
+purpose5,External Royalties Forecast,1
+purpose5,IMS Actuals,1
+purpose5,Market Context Forecast,1
+purpose99,Finance Reporting,1
+purpose99,FTE Dashboard,1
+Entity Master Data (from AZure),TA_41,1
+Pack Master data (From Azure),TA_42,1
+Activity Master Data (From Enigma),TA_43,1
+Cost Centre Master (From Azure and local ERP),TA_44,1
+Actual Exchange Rate Master (From Azure),TA_45,1
+Budget Exchange Rate Master (from Azure),TA_46,1
+Actual Costs Data File (From local ERP),TA_47,1
+Fieldforce Costs/ FTE & Positions actuals (From CDA),TA_50,1
+Extended Sales Forecast,TA_144,1
+Actual Sales Data File,TA_153,1
+Parallel Trade Sales,TA_158,1
+IMS Product,TA_163,1
+IMS Market,TA_164,1
+Fixed Costs Forecast,TA_114,1
+Enigma Non-Fixed Costs Forecast,TA_115,1
+Sales Forecast,TA_116,1
+IMS Forecast,TA_117,1
+IMS Narrative Forecast,TA_118,1
+External Royalties Forecast,TA_122,1
+Parallel Trade Forecast,TA_119,1
+Demand Price / Volume Variance Forecast,TA_120,1
+Headcount Forecast,TA_121,1
+Finance Reporting,TA_199,1
+Finance Reporting,TA_198,1

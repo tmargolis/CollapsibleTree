@@ -1,0 +1,9 @@
+{
+    "name": "Collapsible Tree",
+    "description": "collapsible tree extension",
+    "icon": "extension",
+    "type": "visualization",
+    "version": "1.0",
+    "preview": "icon.png",
+    "author": "Todd Margolis (based on sunburst by Brian Munz)"
+}
