@@ -3,13 +3,13 @@ define(["jquery", "text!./style.css", "./d3.v3.min", "./senseD3utils"], function
     $("<style>").html(cssContent).appendTo("head");
     return {
         initialProperties: {
-            version: 1.0,
+            version: 1.1,
             qHyperCubeDef: {
                 qDimensions: [],
                 qMeasures: [],
                 qInitialDataFetch: [{
-                    qWidth: 20,
-                    qHeight: 2000
+                    qWidth: 10,
+                    qHeight: 500
                 }]
             }
         },
@@ -40,10 +40,10 @@ define(["jquery", "text!./style.css", "./d3.v3.min", "./senseD3utils"], function
         },
         paint: function($element, layout) {
 
-          	//create JSON container object
-          	var myJSON = {"name":layout.title,"children":[]};
+            //create JSON container object
+            var myJSON = {"name":layout.title,"children":[]};
             var qData = layout.qHyperCube.qDataPages[0];
-         	//create matrix variable
+          //create matrix variable
             var qMatrix = qData.qMatrix;
             var numDims = layout.qHyperCube.qDimensionInfo.length;
             var numMsrs = layout.qHyperCube.qMeasureInfo.length;
@@ -52,19 +52,19 @@ define(["jquery", "text!./style.css", "./d3.v3.min", "./senseD3utils"], function
 // console.log("hypercube: ", layout.qHyperCube);
 // console.log("qMatrix: ", qMatrix);
 
-          	//use senseD3.createFamily to create JSON object
+            //use senseD3.createFamily to create JSON object
             // myJSON.children = senseD3.createFamily(qMatrix);
             myJSON.children = senseD3.createBigFamily(qMatrix, numDims, numMsrs);
 // console.log(myJSON);
-          	//create unique id
+            //create unique id
             var id = "sb_" + layout.qInfo.qId;
-			//if extension has already been loaded, empty it, if not attach unique id
+      //if extension has already been loaded, empty it, if not attach unique id
             if (document.getElementById(id)) {
                 $("#" + id).empty();
             } else {
                 $element.append($('<div />').attr("id", id));
             }
-      			$("#" + id).width($element.width()).height($element.height());
+            $("#" + id).width($element.width()).height($element.height());
 
 /////////////////////////
 // Collapsible Tree    //
@@ -235,7 +235,7 @@ define(["jquery", "text!./style.css", "./d3.v3.min", "./senseD3utils"], function
 
         },
       resize:function($el,layout){
-      		// this.paint($el,layout);
+          // this.paint($el,layout);
         }
     };
 });
