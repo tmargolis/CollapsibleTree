@@ -146,6 +146,19 @@ define(["jquery", "text!./style.css", "./d3.v3.min", "./senseD3utils"], function
                   .text(function(d) { return d.name; })
                   .style("fill-opacity", 1e-6);
 
+              nodeEnter.append("title")
+                  .text(function(d){
+                    if(d.children){
+                      return "";
+                    }else{
+                      return d.size;
+                    }
+                  })
+                  .attr("x", function(d) { return d.children || d._children.length ? "0px" : "10px"; })
+                  .attr("dy",  function(d) { return d.children || d._children.length ? "20px" : "3px"; })
+                  .attr("text-anchor", function(d) { return d.children || d._children.length ? "middle" : "start"; })
+                  .style("fill-opacity", 1e-6);
+
               // Transition nodes to their new position.
               var nodeUpdate = node.transition()
                   .duration(duration)
