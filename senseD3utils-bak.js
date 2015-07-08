@@ -19,12 +19,62 @@ var senseD3 = {
     },
   //create family is to be used for creating a tree type data structure which can be used in most D3 tree vizualizations.  
   //See more info about the tree layout here:  https://github.com/mbostock/d3/wiki/Tree-Layout
-    createFamily: function(dataSet,numDims) {
-        var numDims;
-        if(arguments.length==1) {
-            numDims = 2;
+    createFamily: function(dataSet) {
+        //create arrays of parents and children.  this is so we can determine if there's any nodes without parents.  these would be the top parents 
+        var parentsA = [];
+        var kidsA = [];
+        //format Sense data into a more easily consumable format and build the parent/child arrays
+        var happyData = dataSet.map(function(d) {
+            if (kidsA.indexOf(d[0].qText) === -1) {
+                kidsA.push(d[0].qText);
+            }
+            if (parentsA.indexOf(d[1].qText) === -1) {
+                parentsA.push(d[1].qText);
+            }
+            var parentVal = "";
+            if ((!(d[1].qText)) || (d[1].qText == "-") || (d[1].qText == "") || (d[1].qText) == " ") {
+                parentVal = "-";
+            } else {
+                parentVal = d[1].qText;
+            }
+            return {
+                name: d[0].qText,
+                parent: parentVal,
+                size: d[2].qNum
+            };
+        });
+        //loop through the parent and child arrays and find the parents which aren't children.  set those to have a parent of "-", indicating that they're the top parent
+        $.each(parentsA, function() {
+            if (kidsA.indexOf(this.toString()) === -1) {
+                var noParent = {
+                    "name": this.toString(),
+                    "parent": "-"
+                }
+                happyData.push(noParent);
+            }
+        });
+        //crawl through the data to create the family tree in JSON
+        function getChildren(name) {
+            return happyData.filter(function(d) {
+                    return d.parent === name;
+                })
+                .map(function(d) {
+                    return {
+                        name: d.name,
+                        size: d.size,
+                        children: getChildren(d.name)
+                    };
+                });
         }
-        
+
+        return getChildren('-');
+
+    },
+  // createBigFamily is to be used for creating a tree type data structure which can be used in most D3 tree vizualizations.
+  // It differs from createFamily in that it can handle an infinite number of dimensions.
+  // Current version only uses the first measure provided
+  // See more info about the tree layout here:  https://github.com/mbostock/d3/wiki/Tree-Layout
+    createBigFamily: function(dataSet, numDims, numMsrs) {
         //create arrays of parents and children.  this is so we can determine if there's any nodes without parents.  these would be the top parents 
         var parentsA = [];
         var kidsA = [];
@@ -34,7 +84,7 @@ var senseD3 = {
         for(s in dataSet){
             var d = dataSet[s];
             for(i=0; i<numDims-1; i++){
-
+// console.log(d[i].qText);
                 if (parentsA.indexOf(d[i].qText) === -1) {
                     parentsA.push(d[i].qText);
                 }
@@ -57,13 +107,13 @@ var senseD3 = {
                     var newDataSet = {
                         name: d[i+1].qText,
                         parent: parentVal,
-                        size: d[numDims].qNum,
-                        leaf: (i+1) === (numDims-1) ? true : false
+                        size: d[numDims].qNum
                     };
                     happyData.push(newDataSet);
                 }
             }
         }
+// console.log(parentsA);
 
         //loop through the parent and child arrays and find the parents which aren't children.  set those to have a parent of "-", indicating that they're the top parent
         $.each(parentsA, function() {
@@ -75,29 +125,18 @@ var senseD3 = {
                 happyData.push(noParent);
             }
         });
-
+// console.log(happyData);
         //crawl through the data to create the family tree in JSON
         function getChildren(name) {
             return happyData.filter(function(d) {
                     return d.parent === name;
                 })
                 .map(function(d) {
-                    var mapping;
-                    if(d.leaf) {
-                        mapping = {
-                            name: d.name,
-                            size: d.size
-                        };
-                    }
-                    else {
-                        mapping = {
-                            name: d.name,
-                            size: d.size,
-                            children: getChildren(d.name)
-                        };
-                    }
-                    
-                    return mapping;
+                    return {
+                        name: d.name,
+                        size: d.size,
+                        children: getChildren(d.name)
+                    };
                 });
         }
 

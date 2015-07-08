@@ -53,8 +53,8 @@ define(["jquery", "text!./style.css", "./d3.v3.min", "./senseD3utils"], function
 // console.log("qMatrix: ", qMatrix);
 
             //use senseD3.createFamily to create JSON object
-            // myJSON.children = senseD3.createFamily(qMatrix, numDims);
-            myJSON.children = senseD3.createBigFamily(qMatrix, numDims, numMsrs);
+            myJSON.children = senseD3.createFamily(qMatrix, numDims);
+            // myJSON.children = senseD3.createBigFamily(qMatrix, numDims, numMsrs);
 // console.log(myJSON);
             //create unique id
             var id = "sb_" + layout.qInfo.qId;
@@ -141,9 +141,9 @@ define(["jquery", "text!./style.css", "./d3.v3.min", "./senseD3utils"], function
 
               // Add Label
               nodeEnter.append("text")
-                  .attr("x", function(d) { return d.children || d._children.length ? "0px" : "10px"; })
-                  .attr("dy",  function(d) { return d.children || d._children.length ? "20px" : "3px"; })
-                  .attr("text-anchor", function(d) { return d.children || d._children.length ? "middle" : "start"; })
+                  .attr("x", function(d) { return d.children || d._children ? "0px" : "10px"; })
+                  .attr("dy",  function(d) { return d.children || d._children ? "20px" : "3px"; })
+                  .attr("text-anchor", function(d) { return d.children || d._children ? "middle" : "start"; })
                   .text(function(d) { return d.name; })
                   .style("fill-opacity", 1e-6);
 
@@ -156,9 +156,9 @@ define(["jquery", "text!./style.css", "./d3.v3.min", "./senseD3utils"], function
                       return d.size;
                     }
                   })
-                  .attr("x", function(d) { return d.children || d._children.length ? "0px" : "10px"; })
-                  .attr("dy",  function(d) { return d.children || d._children.length ? "20px" : "3px"; })
-                  .attr("text-anchor", function(d) { return d.children || d._children.length ? "middle" : "start"; })
+                  .attr("x", function(d) { return d.children || d._children ? "0px" : "10px"; })
+                  .attr("dy",  function(d) { return d.children || d._children ? "20px" : "3px"; })
+                  .attr("text-anchor", function(d) { return d.children || d._children ? "middle" : "start"; })
                   .style("fill-opacity", 1e-6);
 
               // Transition nodes to their new position.
@@ -239,7 +239,7 @@ define(["jquery", "text!./style.css", "./d3.v3.min", "./senseD3utils"], function
               if (d.children) {
                 d._children = d.children;
                 d.children = null;
-              } else if(d._children.length){
+              } else if(d._children){
                 d.children = d._children;
                 d._children = null;
               }
