@@ -53,7 +53,7 @@ define(["jquery", "text!./style.css", "./d3.v3.min", "./senseD3utils"], function
 // console.log("qMatrix: ", qMatrix);
 
             //use senseD3.createFamily to create JSON object
-            // myJSON.children = senseD3.createFamily(qMatrix);
+            // myJSON.children = senseD3.createFamily(qMatrix, numDims);
             myJSON.children = senseD3.createBigFamily(qMatrix, numDims, numMsrs);
 // console.log(myJSON);
             //create unique id
@@ -139,6 +139,7 @@ define(["jquery", "text!./style.css", "./d3.v3.min", "./senseD3utils"], function
                   .attr("r", 1e-6)
                   .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
 
+              // Add Label
               nodeEnter.append("text")
                   .attr("x", function(d) { return d.children || d._children.length ? "0px" : "10px"; })
                   .attr("dy",  function(d) { return d.children || d._children.length ? "20px" : "3px"; })
@@ -146,6 +147,7 @@ define(["jquery", "text!./style.css", "./d3.v3.min", "./senseD3utils"], function
                   .text(function(d) { return d.name; })
                   .style("fill-opacity", 1e-6);
 
+              // Add Hover Text
               nodeEnter.append("title")
                   .text(function(d){
                     if(d.children){
@@ -237,7 +239,7 @@ define(["jquery", "text!./style.css", "./d3.v3.min", "./senseD3utils"], function
               if (d.children) {
                 d._children = d.children;
                 d.children = null;
-              } else {
+              } else if(d._children.length){
                 d.children = d._children;
                 d._children = null;
               }
